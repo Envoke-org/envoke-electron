@@ -1,0 +1,18 @@
+{
+  "name": "envoke-electron",
+  "main": "main.js",
+  "version": "0.0.0",
+  "description": "electron application that communicates with the envoke api",
+  "scripts": {
+    "start": "electron main.js"
+  },
+  "author": "zachary balder",
+  "license": "MIT",
+  "dependencies": {
+    "form-data": "^2.1.2"
+  },
+  "devDependencies": {
+    "electron": "~1.6.2",
+    "electron-packager": "^8.6.0"
+  }
+}

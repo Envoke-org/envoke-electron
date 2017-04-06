@@ -1,0 +1,30 @@
+<html>
+	<head>
+		<meta charset='utf-8' />
+    <link href='../static/css/styles.css' rel='stylesheet' type='text/css' />
+    <title>search</title>
+	</head>
+  <body>
+	  <button id='home'>HOME</button>
+	  <form id='search'>
+	      <select form='search' id='type' required>
+	          <option value='' selected disabled>--TYPE--</option>
+	          <option value='composition'>COMPOSITION</option>
+	          <option value='license'>LICENSE</option>
+	          <option value='recording'>RECORDING</option>
+	          <option value='right'>RIGHT</option>
+	          <option value='user'>USER</option>
+	      </select><br><br>
+	      <input type='text' id='name' placeholder='TITLE' hidden />
+	      <input type='text' id='userId' required />
+	      <input type='submit' value='SEARCH' />
+	  </form>
+	  <pre id='response-text'></pre>
+		<br><br>
+		<button id='logout'>LOGOUT</button>
+	  <script>
+	    require('../js/common.js')
+	    require('../js/search.js')
+	  </script>
+	</body>
+</html>

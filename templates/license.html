@@ -1,0 +1,38 @@
+<html>
+	<head>
+		<meta charset='utf-8' />
+		<link href='../static/css/styles.css' rel='stylesheet' type='text/css' />
+    <title>license</title>
+	</head>
+  <body>
+    <button id='home'>HOME</button>
+    <form id='license'>
+				<div>
+					<button id='add-licenseFor'>+</button>
+					<button id='remove-licenseFor'>-</button>
+				</div><br>
+				<div id='licenseFors'>
+					<input type='text' name='licenseForId' placeholder='COMPOSITION/RECORDING ID' required />
+				</div>
+				<div>
+					<button id='add-licenseHolder'>+</button>
+					<button id='remove-licenseHolder'>-</button>
+				</div><br>
+        <div id='licenseHolders'>
+          <input type='text' name='licenseHolderId' placeholder='LICENSE-HOLDER ID' required />
+        </div>
+        <label for='validFrom'>VALID FROM</label>
+        <input type='date' id='validFrom' required />
+        <label for='validThrough'>VALID THROUGH</label>
+        <input type='date' id='validThrough' required />
+        <input type='submit' value='LICENSE' />
+    </form>
+    <pre id='response-text'></pre>
+		<br><br>
+		<button id='logout'>LOGOUT</button>
+    <script>
+			require('../js/common.js')
+      require('../js/license.js')
+    </script>
+  </body>
+</html>

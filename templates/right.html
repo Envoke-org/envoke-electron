@@ -1,0 +1,25 @@
+<html>
+	<head>
+		<meta charset='utf-8' />
+		<link href='../static/css/styles.css' rel='stylesheet' type='text/css' />
+    <title>license</title>
+	</head>
+  <body>
+    <button id='home'>HOME</button>
+    <form id='right' name='right-form'>
+        <header>RIGHT</header>
+        <input type='number' id='percentShares' placeholder='PERCENT SHARES' min=1 max=100 required />
+        <input type='text' id='prevRightId' placeholder='PREVIOUS RIGHT ID' />
+        <input type='text' id='recipientId' placeholder='RECIPIENT ID' required />
+        <input type='text' id='rightToId' placeholder='COMPOSITION/RECORDING ID' required />
+        <input type='submit' value='RIGHT' />
+    </form>
+    <pre id='response-text'></pre>
+		<br><br>
+		<button id='logout'>LOGOUT</button>
+    <script>
+			require('../js/common.js')
+      require('../js/right.js')
+    </script>
+  </body>
+</html>

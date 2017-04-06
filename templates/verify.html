@@ -1,0 +1,32 @@
+<html>
+	<head>
+		<meta charset='utf-8' />
+    <link href='../static/css/styles.css' rel='stylesheet' type='text/css' />
+    <title>verify</title>
+	</head>
+  <body>
+    <button id='home'>HOME</button>
+    <form id='verify-form'>
+        <header>VERIFY</header>
+        <select id='type' required>
+            <option selected disabled>--TYPE--</option>
+            <option value='composition'>COMPOSITION</option>
+            <option value='license'>LICENSE</option>
+            <option value='recording'>RECORDING</option>
+            <option value='right'>RIGHT</option>
+        </select><br><br>
+        <input type='text' id='challenge' placeholder='CHALLENGE' required />
+	      <input type='text' id='signature' placeholder='SIGNATURE' required />
+        <input type='text' id='txId' required />
+        <input type='text' id='userId' required />
+        <input type='submit' value='VERIFY' />
+    </form>
+    <pre id='response-text'></pre>
+		<br><br>
+		<button id='logout'>LOGOUT</button>
+    <script>
+      require('../js/common.js')
+      require('../js/verify.js')
+    </script>
+  </body>
+</html>
