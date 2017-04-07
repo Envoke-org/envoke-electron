@@ -11,6 +11,7 @@ document.getElementById('login').addEventListener('submit', (event) => {
   let req = main.httpRequest(
     (res) => {
       if (res.statusCode === 200) {
+        main.addNavigation()
         main.navigate('home')
       } else {
         res.on('data', (data) => {

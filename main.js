@@ -29,70 +29,77 @@ function navigate(page) {
   win.loadURL(`file://${__dirname}/templates/` + page + '.html')
 }
 
+const navigation = {
+  label: 'Navigation',
+  submenu: [
+    {
+      label: 'Home',
+      click() { navigate('home') }
+    },
+    {
+      label: 'Discovery',
+      submenu: [
+        {
+          label: 'Query',
+          click() { navigate('query') }
+        },
+        {
+          label: 'Search',
+          click() { navigate('search') }
+        }
+      ]
+    },
+    {
+      label: 'Metadata',
+      submenu: [
+        {
+          label: 'Composition',
+          click() { navigate('composition') }
+        },
+        {
+          label: 'Recording',
+          click() { navigate('recording') }
+        }
+      ]
+    },
+    {
+      label: 'Ownership',
+      submenu: [
+        {
+          label: 'License',
+          click() { navigate('license') }
+        },
+        {
+          label: 'Right',
+          click() { navigate('right') }
+        }
+      ]
+    },
+    {
+      label: 'Verfication',
+      submenu: [
+        {
+          label: 'Prove',
+          click() { navigate('prove') }
+        },
+        {
+          label: 'Verify',
+          click() { navigate('verify') }
+        }
+      ]
+    }
+  ]
+}
+
+// From electron api-docs
+
 const template = [
   {
     label: app.getName(),
     submenu: [
       {role: 'about'},
       {type: 'separator'},
-      /* {role: 'services', submenu: []}, */
-      {
-        label: 'navigate',
-        submenu: [
-          {
-            label: 'discovery',
-            submenu: [
-              {
-                label: 'query',
-                click() { navigate('query') }
-              },
-              {
-                label: 'search',
-                click() { navigate('search') }
-              }
-            ]
-          },
-          {
-            label: 'metadata',
-            submenu: [
-              {
-                label: 'composition',
-                click() { navigate('composition') }
-              },
-              {
-                label: 'recording',
-                click() { navigate('recording') }
-              }
-            ]
-          },
-          {
-            label: 'ownership',
-            submenu: [
-              {
-                label: 'license',
-                click() { navigate('license') }
-              },
-              {
-                label: 'right',
-                click() { navigate('right') }
-              }
-            ]
-          },
-          {
-            label: 'verfication',
-            submenu: [
-              {
-                label: 'prove',
-                click() { navigate('prove') }
-              },
-              {
-                label: 'verify',
-                click() { navigate('verify') }
-              }
-            ]
-          }
-        ]
-      },
+      {role: 'services', submenu: []},
       {type: 'separator'},
       {role: 'hide'},
       {role: 'hideothers'},
@@ -132,13 +139,28 @@ const template = [
   {
     role: 'window',
     submenu: [
+      {role: 'close'},
       {role: 'minimize'},
-      {role: 'close'}
+      {role: 'zoom'},
+      {type: 'separator'},
+      {role: 'front'}
     ]
   }
 ]
 
 let menu, win
+
+function addNavigation() {
+  template.splice(2, 0, navigation)
+  menu = Menu.buildFromTemplate(template)
+  Menu.setApplicationMenu(menu)
+}
+
+function removeNavigation() {
+  template.splice(2, 1)
+  menu = Menu.buildFromTemplate(template)
+  Menu.setApplicationMenu(menu)
+}
 
 app.on('ready', () => {
   menu = Menu.buildFromTemplate(template)
@@ -151,6 +173,8 @@ app.on('ready', () => {
   })
 })
 
+exports.addNavigation = addNavigation
 exports.formatJSON = formatJSON
 exports.httpRequest = httpRequest
 exports.navigate = navigate
+exports.removeNavigation = removeNavigation

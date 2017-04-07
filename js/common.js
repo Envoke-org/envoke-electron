@@ -21,6 +21,7 @@ let logout = document.getElementById('logout')
 
 if (logout !== null) {
   logout.addEventListener('click', () => {
+    main.removeNavigation()
     main.navigate('login-register')
   }, false)
 }
