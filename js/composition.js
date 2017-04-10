@@ -23,10 +23,10 @@ let composers = document.getElementsByName('composer'),
         'split': '20%'
       },
     }
-common.addPartyListener(fieldNames, 'composer', widths)
-common.addPartyListener(fieldNames, 'publisher', widths)
-common.removePartyListener(fieldNames, 1, 'composer', widths)
-common.removePartyListener(fieldNames, 0, 'publisher', widths)
+common.addSubjectListener(fieldNames, 'composer', widths)
+common.addSubjectListener(fieldNames, 'publisher', widths)
+common.removeSubjectListener(fieldNames, 1, 'composer', widths)
+common.removeSubjectListener(fieldNames, 0, 'publisher', widths)
 common.selectActionListener(fieldNames, widths)
 
 function newComposition() {

@@ -3,7 +3,7 @@ const main = remote.require('./main.js')
 
 let home = document.getElementById('home')
 
-if (home !== null) {
+if (home) {
   home.addEventListener('click', () => {
     main.navigate('home')
   })
@@ -19,7 +19,7 @@ for (i = 0; i < inputs.length; i++) {
 
 let logout = document.getElementById('logout')
 
-if (logout !== null) {
+if (logout) {
   logout.addEventListener('click', () => {
     main.removeNavigation()
     main.navigate('login-register')
@@ -35,99 +35,119 @@ function hideShow(element, required) {
   }
 }
 
-function addPartyListener(fieldNames, partyName, widths) {
+function addSubjectListener(propertyNames, subjectName, widths) {
   let action = document.getElementById('action'),
-      fields = {},
-      group = document.getElementById(partyName),
-      parties = document.getElementsByClassName('party')
-  for (i = 0; i < fieldNames.length; i++) {
-    fields[fieldNames[i]] = document.getElementsByName(fieldNames[i])
-    for (j = 0; j < fields[fieldNames[i]].length; j++) {
-      hideShow(fields[fieldNames[i]][j])
+      properties = {},
+      group = document.getElementById(subjectName),
+      subject = document.getElementsByName(subjectName),
+      subjects = document.getElementsByClassName('subject')
+  if (propertyNames !== null) {
+    for (i = 0; i < propertyNames.length; i++) {
+      properties[propertyNames[i]] = document.getElementsByName(propertyNames[i])
+      for (j = 0; j < properties[propertyNames[i]].length; j++) {
+        hideShow(properties[propertyNames[i]][j])
+      }
     }
   }
-  document.getElementById('add-' + partyName).addEventListener('click', () => {
-    if (parties.length === 1) {
-      parties[0].style.width = widths[action.value]['party']
-      for (i = 0; i < fieldNames.length; i++) {
-        let field = fields[fieldNames[i]][0]
-        field.style.width = widths[action.value][fieldNames[i]]
-        hideShow(field, true)
+  document.getElementById('add-' + subjectName).addEventListener('click', () => {
+    if (subjects.length === 1) {
+      if (widths) {
+        subjects[0].style.width = widths[action.value]['subject']
+      } else {
+        subjects[0].style.width = '100%'
+      }
+      if (propertyNames) {
+        for (i = 0; i < propertyNames.length; i++) {
+          let property = properties[propertyNames[i]][0]
+          property.style.width = widths[action.value][propertyNames[i]]
+          hideShow(property, true)
+        }
       }
     }
     let div = document.createElement('div')
-    let party = document.createElement('input')
-    party.className = 'party'
-    party.name = partyName
-    party.placeholder = partyName.toUpperCase()
-    party.required = true
-    party.style.width = widths[action.value]['party']
-    party.type = 'text'
-    div.appendChild(party)
-    for (i = 0; i < fieldNames.length; i++) {
-      let input = fields[fieldNames[i]][0].cloneNode(true)
-      input.style.width = widths[action.value][fieldNames[i]]
-      hideShow(input, true)
-      div.appendChild(input)
+    let subject = document.createElement('input')
+    subject.className = 'subject'
+    subject.name = subjectName
+    subject.placeholder = subjectName.toUpperCase()
+    subject.required = true
+    if (widths) {
+      subject.style.width = widths[action.value]['subject']
+    } else {
+      subject.style.width = '100%'
+    }
+    subject.type = 'text'
+    div.appendChild(subject)
+    if (propertyNames) {
+      for (i = 0; i < propertyNames.length; i++) {
+        let property = properties[propertyNames[i]][0].cloneNode(true)
+        property.style.width = widths[action.value][propertyNames[i]]
+        hideShow(property, true)
+        div.appendChild(property)
+      }
     }
     group.appendChild(div)
   }, false)
 }
 
-function removePartyListener(fieldNames, minimum, partyName, widths) {
-  let action = document.getElementById('action'),
-      group = document.getElementById(partyName),
-      party = document.getElementsByName(partyName),
-      parties = document.getElementsByClassName('party')
-  document.getElementById('remove-' + partyName).addEventListener('click', () => {
-    if (party.length > minimum) {
+function removeSubjectListener(minimum, propertyNames, subjectName, widths) {
+  let group = document.getElementById(subjectName),
+      subject = document.getElementsByName(subjectName),
+      subjects = document.getElementsByClassName('subject')
+  document.getElementById('remove-' + subjectName).addEventListener('click', () => {
+    if (subject.length > minimum) {
       group.removeChild(group.lastChild)
     }
-    if (parties.length == 1) {
-      parties[0].style.width = widths['default']['party']
-      for (i = 0; i < fieldNames.length; i++) {
-        let field = document.getElementsByName(fieldNames[i])[0]
-        field.style.width = widths['default'][fieldNames[i]]
-        hideShow(field)
+    if (subjects.length == 1) {
+      if (widths) {
+        subjects[0].style.width = widths['default']['subject']
+      } else {
+        subjects[0].style.width = '100%'
+      }
+      if (propertyNames !== null) {
+        for (i = 0; i < propertyNames.length; i++) {
+          let property = document.getElementsByName(propertyNames[i])[0]
+          property.style.width = widths['default'][propertyNames[i]]
+          hideShow(property)
+        }
       }
     }
   }, false)
 }
 
-function selectActionListener(fieldNames, widths) {
+function selectActionListener(propertyNames, widths) {
   let action = document.getElementById('action'),
-      fields = {},
+      properties = {},
       submit = document.getElementById('submit'),
-      parties = document.getElementsByClassName('party')
-  for (i = 0; i < fieldNames.length; i++) {
-    fields[fieldNames[i]] = document.getElementsByName(fieldNames[i])
-    for (j = 0; j < fields[fieldNames[i]].length; j++) {
-      hideShow(fields[fieldNames[i]][j])
+      subjects = document.getElementsByClassName('subject')
+  for (i = 0; i < propertyNames.length; i++) {
+    properties[propertyNames[i]] = document.getElementsByName(propertyNames[i])
+    for (j = 0; j < properties[propertyNames[i]].length; j++) {
+      hideShow(properties[propertyNames[i]][j])
     }
   }
   submit.value = action.options[action.selectedIndex].text
   action.addEventListener('change', () => {
     submit.value = action.options[action.selectedIndex].text
-    if (parties.length == 1) {
-        parties[0].style.width = widths['default']['party']
-        for (i = 0; i < fieldNames.length; i++) {
-          let field = fields[fieldNames[i]][0]
-          field.style.width = widths['default'][fieldNames[i]]
-          hideShow(field)
+    if (subjects.length == 1) {
+        subjects[0].style.width = widths['default']['subject']
+        for (i = 0; i < propertyNames.length; i++) {
+          let property = properties[propertyNames[i]][0]
+          property.style.width = widths['default'][propertyNames[i]]
+          hideShow(property)
         }
     } else {
-      for (i = 0; i < parties.length; i++) {
-        parties[i].style.width = widths[action.value]['party']
-        for (j = 0; j < fieldNames.length; j++) {
-          let field = fields[fieldNames[j]][i]
-          field.style.width = widths[action.value][fieldNames[j]]
-          hideShow(field)
+      for (i = 0; i < subjects.length; i++) {
+        subjects[i].style.width = widths[action.value]['subject']
+        for (j = 0; j < propertyNames.length; j++) {
+          let property = properties[propertyNames[j]][i]
+          property.style.width = widths[action.value][propertyNames[j]]
+          hideShow(property)
         }
       }
     }
   })
 }
 
-exports.addPartyListener = addPartyListener
-exports.removePartyListener = removePartyListener
+exports.addSubjectListener = addSubjectListener
+exports.removeSubjectListener = removeSubjectListener
 exports.selectActionListener = selectActionListener
