@@ -2,111 +2,47 @@ const {remote} = require('electron')
 const main = remote.require('./main.js')
 const FormData = require('form-data')
 
-let action = document.getElementById('action'),
-    composerIds = document.getElementsByName('composerId'),
-    composers = document.getElementById('composers'),
-    signatures = document.getElementsByName('signature'),
-    splits = document.getElementsByName('split'),
-    submit = document.getElementById('submit')
+const common = require('./common.js')
 
-submit.value = action.options[action.selectedIndex].text
-
-action.addEventListener('change', () => {
-  submit.value = action.options[action.selectedIndex].text
-  if (composerIds.length > 1) {
-    if (action.value === '/publish') {
-      for (i = 0; i < composerIds.length; i++) {
-        composerIds[i].style.width = '40%'
-      }
-      for (i = 0; i < signatures.length; i++) {
-        signatures[i].hidden = false
-        signatures[i].required = true
-      }
-    } else {
-      for (i = 0; i < composerIds.length; i++) {
-        composerIds[i].style.width = '80%'
-      }
-      for (i = 0; i < signatures.length; i++) {
-        signatures[i].hidden = true
-        signatures[i].required = false
-      }
+let composers = document.getElementsByName('composer'),
+    fieldNames = ['signature', 'split'],
+    widths = {
+      'default': {
+        'party': '100%',
+        'signature': '0%',
+        'split': '0%'
+      },
+      '/publish': {
+        'party': '40%',
+        'signature': '40%',
+        'split': '20%'
+      },
+      '/sign/composition': {
+        'party': '80%',
+        'signature': '0%',
+        'split': '20%'
+      },
     }
-  }
-})
-
-document.getElementById('add-composer').addEventListener('click', () => {
-  if (composerIds.length === 1) {
-    if (action.value === '/publish') {
-      composerIds[0].style.width = '40%'
-      signatures[0].hidden = false
-      signatures[0].required = true
-    } else {
-      composerIds[0].style.width = '80%'
-      signatures[0].hidden = true
-      signatures[0].required = false
-    }
-    splits[0].hidden = false
-    splits[0].required = true
-  }
-  let composer = document.createElement('div')
-  let composerId = document.createElement('input')
-  composerId.name = 'composerId'
-  composerId.placeholder = 'COMPOSER ID'
-  composerId.required = true
-  if (action.value === '/publish') {
-      composerId.style.width = '40%'
-  } else {
-    composerId.style.width = '80%'
-  }
-  composerId.type = 'text'
-  composer.appendChild(composerId)
-  let signature = document.createElement('input')
-  signature.name='signature'
-  signature.placeholder = 'SIGNATURE'
-  if (action.value === '/publish') {
-    signature.hidden = false
-    signature.required = true
-  } else {
-    signature.hidden = true
-    signature.required = false
-  }
-  signature.style.width = '40%'
-  signature.type='text'
-  composer.append(signature)
-  let split = document.createElement('input')
-  split.minimum=1
-  split.maximum=99
-  split.name='split'
-  split.placeholder='SPLIT'
-  split.required=true
-  split.style.width = '20%'
-  split.type='number'
-  composer.appendChild(split)
-  composers.appendChild(composer)
-}, false)
-
-document.getElementById('remove-composer').addEventListener('click', () => {
-  if (composerIds.length > 1) {
-    composers.removeChild(composers.lastChild)
-    if (composerIds.length === 1) {
-      composerIds[0].style.width = '100%'
-      signatures[0].hidden = true
-      signatures[0].required = false
-      splits[0].hidden = true
-      splits[0].required = false
-    }
-  }
-}, false)
+common.addPartyListener(fieldNames, 'composer', widths)
+common.addPartyListener(fieldNames, 'publisher', widths)
+common.removePartyListener(fieldNames, 1, 'composer', widths)
+common.removePartyListener(fieldNames, 0, 'publisher', widths)
+common.selectActionListener(fieldNames, widths)
 
 function newComposition() {
-  let form = new FormData()
-  for (i = 0; i < composerIds.length; i++) {
-      form.append('composerIds', composerIds[i].value)
+  let form = new FormData(),
+      publishers = document.getElementsByName('publisher'),
+      signatures = document.getElementsByName('signature'),
+      splits = document.getElementsByName('split')
+  for (i = 0; i < composers.length; i++) {
+      form.append('composerIds', composers[i].value)
   }
   form.append('inLanguage', document.getElementById('inLanguage').value)
   form.append('iswcCode', document.getElementById('iswcCode').value)
   form.append('name', document.getElementById('name').value)
-  form.append('publisherId', document.getElementById('publisherId').value)
+  for (i = 0; i < publisherIds.length; i++) {
+    form.append('publisherIds', publisherIds[i].value)
+  }
   if (signatures.length > 1) {
     for (i = 0; i < signatures.length; i++) {
       form.append('signatures', signatures[i].value)

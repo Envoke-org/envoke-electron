@@ -13,20 +13,24 @@
 					<option value='/sign/composition'>SIGN</option>
 				</select><br><br>
 				<div>
-					<button id='add-composer'>+</button>
-					<button id='remove-composer'>-</button>
+					<button id='add-composer'>ADD COMPOSER</button>
+					<button id='remove-composer'>REMOVE COMPOSER</button>
 				</div><br>
-        <div id='composers'>
+        <div id='composer'>
 					<div>
-          	<input type='text' name='composerId' placeholder='COMPOSER ID' required />
-						<input type='text' name='signature' placeholder='SIGNATURE' style='float:left;width:40%;' hidden />
-						<input type='number' name='split' minimum=1 maximum=99 placeholder='SPLIT' style='float:left;width:20%;' hidden />
+          	<input type='text' class='party' name='composer' placeholder='COMPOSER' required />
+						<input type='text' name='signature' placeholder='SIGNATURE' style='float:left;width:0%;' />
+						<input type='number' name='split' minimum=1 maximum=99 placeholder='SPLIT' style='float:left;width:0%;' />
 					</div>
         </div>
         <input type='text' id='inLanguage' placeholder='LANGUAGE' />
         <input type='text' id='iswcCode' placeholder='ISWC CODE' />
-        <input type='text' id='name' placeholder='TITLE' required />
-				<input type='text' id='publisherId' placeholder='PUBLISHER ID' />
+        <input type='text' id='name' placeholder='TITLE' required /><br><br>
+				<div>
+					<button id='add-publisher'>ADD PUBLISHER</button>
+					<button id='remove-publisher'>REMOVE PUBLISHER</button>
+				</div><br>
+				<div id='publisher'></div>
         <input type='text' id='url' placeholder='URL' />
 				<input type='submit' id='submit' />
     </form>
@@ -34,7 +38,6 @@
 		<br><br>
 		<button id='logout'>LOGOUT</button>
     <script>
-      require('../js/common.js')
       require('../js/composition.js')
     </script>
   </body>

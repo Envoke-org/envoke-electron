@@ -148,7 +148,7 @@ const template = [
   }
 ]
 
-let menu, win
+let menu, touchBar, win
 
 function addNavigation() {
   template.splice(2, 0, navigation)
@@ -165,9 +165,8 @@ function removeNavigation() {
 app.on('ready', () => {
   menu = Menu.buildFromTemplate(template)
   Menu.setApplicationMenu(menu)
-  win = new BrowserWindow({'width': 1000, 'height': 1000})
+  win = new BrowserWindow({'height': 1000, 'width': 1000})
   win.loadURL(`file://${__dirname}/templates/login-register.html`)
-  // win.webContents.openDevTools()
   win.on('closed', () => {
     win = null
   })

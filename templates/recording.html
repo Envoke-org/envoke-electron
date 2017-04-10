@@ -13,21 +13,26 @@
 					<option value='/sign/recording'>SIGN</option>
 				</select><br><br>
 				<div>
-					<button id='add-artist'>+</button>
-					<button id='remove-artist'>-</button>
+					<button id='add-artist'>ADD ARTIST</button>
+					<button id='remove-artist'>REMOVE ARTIST</button>
 				</div><br>
-        <div id='artists'>
+        <div id='artist'>
 					<div>
-						<input type='text' name='artistId' placeholder='ARTIST ID' required />
-						<input type='text' name='signature' placeholder='SIGNATURE' style='float:left;width:40%;' hidden />
-						<input type='number' name='split' minimum=1 maximum=99 placeholder='SPLIT' style='float:left;width:20%;' hidden />
+						<input type='text' class='party' name='artist' placeholder='ARTIST' style='float:left;width:60%;' required />
+						<input type='text' name='license' placeholder='LICENSE' style='float:left;width:20%;' />
+						<input type='text' name='right' placeholder='RIGHT' style='float:left;width:20%;' />
+						<input type='text' name='signature' placeholder='SIGNATURE' style='float:left;width:0%;' />
+						<input type='number' name='split' minimum=1 maximum=99 placeholder='SPLIT' style='float:left;width:0%;' />
 					</div>
         </div>
-        <input type='text' id='compositionId' placeholder='COMPOSITION ID' required />
+        <input type='text' id='composition' placeholder='COMPOSITION' required />
         <input type='text' id='duration' placeholder='DURATION' />
-        <input type='text' id='isrcCode' placeholder='ISRC CODE' />
-        <input type='text' id='licenseId' placeholder='LICENSE ID' />
-				<input type='text' id='recordLabelId' placeholder='RECORD LABEL ID' />
+        <input type='text' id='isrcCode' placeholder='ISRC CODE' /><br><br>
+				<div>
+					<button id='add-record-label'>ADD RECORD-LABEL</button>
+					<button id='remove-record-label'>REMOVE RECORD-LABEL</button>
+				</div><br>
+				<div id='record-label'></div><br><br>
         <input type='text' id='url' placeholder='URL' />
 				<input type='submit' id='submit' />
     </form>
@@ -35,7 +40,6 @@
 		<br><br>
 		<button id='logout'>LOGOUT</button>
     <script>
-      require('../js/common.js')
       require('../js/recording.js')
     </script>
   </body>

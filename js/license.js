@@ -2,6 +2,8 @@ const {remote} = require('electron')
 const main = remote.require('./main.js')
 const FormData = require('form-data')
 
+const common = require('./common.js')
+
 let licenseForIds = document.getElementsByName('licenseForId'),
     licenseFors = document.getElementById('licenseFors'),
     licenseHolderIds = document.getElementsByName('licenseHolderId'),

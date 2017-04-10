@@ -3,6 +3,8 @@ const main = remote.require('./main.js')
 const FormData = require('form-data')
 const fs = require('fs')
 
+const common = require('./common.js')
+
 document.getElementById('login').addEventListener('submit', (event) => {
   event.preventDefault()
   let form = new FormData()
