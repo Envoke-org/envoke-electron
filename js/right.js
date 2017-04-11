@@ -2,13 +2,15 @@ const {remote} = require('electron')
 const main = remote.require('./main.js')
 const FormData = require('form-data')
 
-document.getElementById('right').addEventListener('submit', (event) => {
+const common = require('./common.js')
+
+document.getElementById('right-form').addEventListener('submit', (event) => {
   event.preventDefault()
   let form = new FormData()
-  form.append('percentShares', document.getElementById('percentShares').value)
-  form.append('prevRightId', document.getElementById('prevRightId').value)
-  form.append('recipientId', document.getElementById('recipientId').value)
-  form.append('rightToId', document.getElementById('rightToId').value)
+  form.append('percentShares', document.getElementById('percent-shares').value)
+  form.append('previousRightId', document.getElementById('previous-right').value)
+  form.append('recipientId', document.getElementById('recipient').value)
+  form.append('rightToId', document.getElementById('right-to').value)
   let req = main.httpRequest(
     (res) => {
       if (res.statusCode === 200) {
@@ -23,4 +25,6 @@ document.getElementById('right').addEventListener('submit', (event) => {
     },
     form.getHeaders(), 'POST', '/right'
   )
+  form.pipe(req)
+  req.end()
 }, false)

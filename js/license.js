@@ -14,14 +14,14 @@ document.getElementById('license').addEventListener('submit', (event) => {
   let form = new FormData(),
       licenseFor = document.getElementsByName('license-for'),
       licenseHolder = document.getElementsByName('license-holder')
-  for (i = 0; i < licenseForIds.length; i++) {
+  for (i = 0; i < licenseFor.length; i++) {
     form.append('licenseForIds', licenseFor[i].value)
   }
-  for (i = 0; i < licenseHolderIds.length; i++) {
+  for (i = 0; i < licenseHolder.length; i++) {
     form.append('licenseHolderIds', licenseHolder[i].value)
   }
-  form.append('validFrom', document.getElementById('validFrom').value)
-  form.append('validThrough', document.getElementById('validThrough').value)
+  form.append('validFrom', document.getElementById('valid-from').value)
+  form.append('validThrough', document.getElementById('valid-through').value)
   let req = main.httpRequest(
     (res) => {
       if (res.statusCode === 200) {

@@ -2,6 +2,8 @@ const {remote} = require('electron')
 const main = remote.require('./main.js')
 const path = require('path')
 
+const common = require('./common.js')
+
 let name = document.getElementById('name'),
     type = document.getElementById('type'),
     userId = document.getElementById('userId')

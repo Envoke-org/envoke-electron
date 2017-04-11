@@ -60,7 +60,7 @@ function addSubjectListener(propertyNames, subjectName, widths) {
         for (i = 0; i < propertyNames.length; i++) {
           let property = properties[propertyNames[i]][0]
           property.style.width = widths[action.value][propertyNames[i]]
-          hideShow(property, true)
+          hideShow(property)
         }
       }
     }
@@ -81,7 +81,7 @@ function addSubjectListener(propertyNames, subjectName, widths) {
       for (i = 0; i < propertyNames.length; i++) {
         let property = properties[propertyNames[i]][0].cloneNode(true)
         property.style.width = widths[action.value][propertyNames[i]]
-        hideShow(property, true)
+        hideShow(property)
         div.appendChild(property)
       }
     }

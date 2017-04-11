@@ -2,6 +2,8 @@ const {remote} = require('electron')
 const main = remote.require('./main.js')
 const path = require('path')
 
+const common = require('./common.js')
+
 document.getElementById('query').addEventListener('submit', (event) => {
   event.preventDefault()
   let urlpath = path.join('/query', document.getElementById('id').value)

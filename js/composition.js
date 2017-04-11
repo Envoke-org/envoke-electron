@@ -4,53 +4,53 @@ const FormData = require('form-data')
 
 const common = require('./common.js')
 
-let composers = document.getElementsByName('composer'),
-    fieldNames = ['signature', 'split'],
+let composer = document.getElementsByName('composer'),
+    propertyNames = ['signature', 'split'],
     widths = {
       'default': {
-        'party': '100%',
         'signature': '0%',
-        'split': '0%'
+        'split': '0%',
+        'subject': '100%'
       },
       '/publish': {
-        'party': '40%',
         'signature': '40%',
-        'split': '20%'
+        'split': '20%',
+        'subject': '40%'
       },
       '/sign/composition': {
-        'party': '80%',
         'signature': '0%',
-        'split': '20%'
+        'split': '20%',
+        'subject': '80%'
       },
     }
-common.addSubjectListener(fieldNames, 'composer', widths)
-common.addSubjectListener(fieldNames, 'publisher', widths)
-common.removeSubjectListener(fieldNames, 1, 'composer', widths)
-common.removeSubjectListener(fieldNames, 0, 'publisher', widths)
-common.selectActionListener(fieldNames, widths)
+common.addSubjectListener(propertyNames, 'composer', widths)
+common.addSubjectListener(propertyNames, 'publisher', widths)
+common.removeSubjectListener(1, propertyNames, 'composer', widths)
+common.removeSubjectListener(0, propertyNames, 'publisher', widths)
+common.selectActionListener(propertyNames, widths)
 
 function newComposition() {
   let form = new FormData(),
-      publishers = document.getElementsByName('publisher'),
-      signatures = document.getElementsByName('signature'),
-      splits = document.getElementsByName('split')
-  for (i = 0; i < composers.length; i++) {
-      form.append('composerIds', composers[i].value)
+      publisher = document.getElementsByName('publisher'),
+      signature = document.getElementsByName('signature'),
+      split = document.getElementsByName('split')
+  for (i = 0; i < composer.length; i++) {
+      form.append('composerIds', composer[i].value)
   }
-  form.append('inLanguage', document.getElementById('inLanguage').value)
-  form.append('iswcCode', document.getElementById('iswcCode').value)
+  form.append('inLanguage', document.getElementById('language').value)
+  form.append('iswcCode', document.getElementById('iswc').value)
   form.append('name', document.getElementById('name').value)
-  for (i = 0; i < publisherIds.length; i++) {
-    form.append('publisherIds', publisherIds[i].value)
+  for (i = 0; i < publisher.length; i++) {
+    form.append('publisherIds', publisher[i].value)
   }
-  if (signatures.length > 1) {
-    for (i = 0; i < signatures.length; i++) {
-      form.append('signatures', signatures[i].value)
+  if (signature.length > 1) {
+    for (i = 0; i < signature.length; i++) {
+      form.append('signatures', signature[i].value)
     }
   }
-  if (splits.length > 1) {
-    for (i = 0; i < splits.length; i++) {
-      form.append('splits', splits[i].value)
+  if (split.length > 1) {
+    for (i = 0; i < split.length; i++) {
+      form.append('splits', split[i].value)
     }
   }
   form.append('url', document.getElementById('url').value)

@@ -5,27 +5,27 @@ const path = require('path')
 const common = require('./common.js')
 
 let challenge = document.getElementById('challenge'),
-    txId = document.getElementById('txId'),
+    tx = document.getElementById('tx'),
     type = document.getElementById('type'),
-    userId = document.getElementById('userId')
+    user = document.getElementById('user')
 
 type.addEventListener('change', () => {
   switch (type.value) {
       case 'composition':
-          txId.placeholder = 'COMPOSITION ID'
-          userId.placeholder = 'COMPOSER ID'
+          tx.placeholder = 'COMPOSITION'
+          user.placeholder = 'COMPOSER'
           break
       case 'license':
-          txId.placeholder = 'LICENSE ID'
-          userId.placeholder = 'LICENSE-HOLDER ID'
+          tx.placeholder = 'LICENSE'
+          user.placeholder = 'LICENSE-HOLDER'
           break
       case 'recording':
-          txId.placeholder = 'RECORDING ID'
-          userId.placeholder = 'ARTIST ID'
+          tx.placeholder = 'RECORDING'
+          user.placeholder = 'ARTIST'
           break
       case 'right':
-          txId.placeholder = 'RIGHT ID'
-          userId.placeholder = 'RIGHT-HOLDER ID'
+          tx.placeholder = 'RIGHT'
+          user.placeholder = 'RIGHT-HOLDER'
           break
       default:
           alert('Invalid type: ' + type.value)
@@ -34,7 +34,7 @@ type.addEventListener('change', () => {
 
 document.getElementById('prove-form').addEventListener('submit', (event) => {
   event.preventDefault()
-  let urlpath = path.join('/prove', challenge.value, txId.value, type.value, userId.value)
+  let urlpath = path.join('/prove', challenge.value, tx.value, type.value, user.value)
   let req = main.httpRequest(
     (res) => {
       if (res.statusCode === 200) {

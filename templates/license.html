@@ -12,19 +12,19 @@
 					<button id='remove-license-for'>REMOVE LICENSE-FOR</button>
 				</div><br>
 				<div id='license-for'>
-					<input type='text' name='license-for' placeholder='LICENSE-FOR' required />
+					<input type='text' class='subject' name='license-for' placeholder='LICENSE-FOR' required />
 				</div>
 				<div>
 					<button id='add-license-holder'>ADD LICENSE-HOLDER</button>
 					<button id='remove-license-holder'>REMOVE LICENSE-HOLDER</button>
 				</div><br>
         <div id='license-holder'>
-          <input type='text' name='license-holder' placeholder='LICENSE-HOLDER' required />
+          <input type='text' class='subject' name='license-holder' placeholder='LICENSE-HOLDER' required />
         </div>
-        <label for='validFrom'>VALID FROM</label>
-        <input type='date' id='validFrom' required /><br>
-        <label for='validThrough'>VALID THROUGH</label>
-        <input type='date' id='validThrough' required />
+        <label for='valid-from'>VALID FROM</label>
+        <input type='date' id='valid-from' required /><br>
+        <label for='valid-through'>VALID THROUGH</label>
+        <input type='date' id='valid-through' required />
         <input type='submit' value='LICENSE' />
     </form>
     <pre id='response-text'></pre>
