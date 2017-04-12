@@ -2,17 +2,24 @@
 	<head>
 		<meta charset='utf-8' />
 		<link href='../static/css/styles.css' rel='stylesheet' type='text/css' />
-    <title>license</title>
+    <title>right</title>
 	</head>
   <body>
     <button id='home'>HOME</button>
     <form id='right-form'>
         <header>RIGHT</header>
-        <input type='number' id='percent-shares' placeholder='PERCENT SHARES' min=1 max=100 required />
-        <input type='text' id='previous-right' placeholder='PREVIOUS RIGHT' />
-        <input type='text' id='recipient' placeholder='RECIPIENT' required />
-        <input type='text' id='right-to' placeholder='RIGHT-TO' required />
-        <input type='submit' value='RIGHT' />
+	      <input type='text' id='asset' placeholder='ASSET' required />
+				<div>
+					<button id='add-recipient'>ADD RECIPIENT</button>
+					<button id='remove-recipient'>REMOVE RECIPIENT</button>
+				</div><br>
+				<div id='recipient'>
+					<div>
+						<input type='text' class='subject' name='recipient' placeholder='RECIPIENT' style='float:left;width:50%;' required />
+					  <input type='number' name='split' placeholder='SPLIT' min=1 max=100 style='float:left;width:50%;' required />
+					</div>
+				</div>
+        <input type='submit' value='TRANSFER' />
     </form>
     <pre id='response-text'></pre>
 		<br><br>

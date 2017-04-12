@@ -51,15 +51,21 @@ function addSubjectListener(propertyNames, subjectName, widths) {
   }
   document.getElementById('add-' + subjectName).addEventListener('click', () => {
     if (subjects.length === 1) {
-      if (widths) {
+      if (action) {
         subjects[0].style.width = widths[action.value]['subject']
+      } else if (widths) {
+        subjects[0].style.width = widths['default']['subject']
       } else {
         subjects[0].style.width = '100%'
       }
       if (propertyNames) {
         for (i = 0; i < propertyNames.length; i++) {
           let property = properties[propertyNames[i]][0]
-          property.style.width = widths[action.value][propertyNames[i]]
+          if (action) {
+            property.style.width = widths[action.value][propertyNames[i]]
+          } else {
+            property.style.width = widths['default'][propertyNames[i]]
+          }
           hideShow(property)
         }
       }
@@ -70,8 +76,10 @@ function addSubjectListener(propertyNames, subjectName, widths) {
     subject.name = subjectName
     subject.placeholder = subjectName.toUpperCase()
     subject.required = true
-    if (widths) {
+    if (action) {
       subject.style.width = widths[action.value]['subject']
+    } else if (widths) {
+      subject.style.width = widths['default']['subject']
     } else {
       subject.style.width = '100%'
     }
@@ -80,7 +88,11 @@ function addSubjectListener(propertyNames, subjectName, widths) {
     if (propertyNames) {
       for (i = 0; i < propertyNames.length; i++) {
         let property = properties[propertyNames[i]][0].cloneNode(true)
-        property.style.width = widths[action.value][propertyNames[i]]
+        if (action) {
+          property.style.width = widths[action.value][propertyNames[i]]
+        } else {
+          property.style.width = widths['default'][propertyNames[i]]
+        }
         hideShow(property)
         div.appendChild(property)
       }

@@ -14,11 +14,7 @@ function httpRequest(callback, headers, method, path) {
   if (headers !== null) {
     options['headers'] = headers
   }
-  let req = http.request(options, callback)
-  req.on('error', (err) => {
-    alert(err)
-  })
-  return req
+  return http.request(options, callback)
 }
 
 function formatJSON(data) {

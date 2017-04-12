@@ -6,42 +6,38 @@ const path = require('path')
 const common = require('./common.js')
 
 let artist = document.getElementsByName('artist'),
-    propertyNames = ['license', 'right', 'signature', 'split'],
+    propertyNames = ['license', 'signature', 'split'],
     widths = {
       'default': {
-        'license': '20%',
-        'right': '20%',
+        'license': '50%',
         'signature': '0%',
         'split': '0%',
-        'subject': '60%'
+        'subject': '50%'
       },
       '/release': {
-        'license': '20%',
-        'right': '20%',
-        'signature': '20%',
-        'split': '20%',
-        'subject': '20%'
-      },
-      '/sign/recording': {
         'license': '25%',
-        'right': '25%',
-        'signature': '0%',
+        'signature': '25%',
         'split': '25%',
         'subject': '25%'
+      },
+      '/sign/recording': {
+        'license': '33%',
+        'signature': '0%',
+        'split': '33%',
+        'subject': '34%'
       }
     }
 
 common.addSubjectListener(propertyNames, 'artist', widths)
 common.addSubjectListener(propertyNames, 'label', widths)
-common.removeSubjectListener(propertyNames, 1, 'artist', widths)
-common.removeSubjectListener(propertyNames, 0, 'label', widths)
+common.removeSubjectListener(1, propertyNames, 'artist', widths)
+common.removeSubjectListener(0, propertyNames, 'label', widths)
 common.selectActionListener(propertyNames, widths)
 
 function newRecording() {
   let form = new FormData(),
       license = document.getElementsByName('license'),
       label = document.getElementsByName('label'),
-      right = document.getElementsByName('right'),
       signature = document.getElementsByName('signature'),
       split = document.getElementsByName('split')
   for (i = 0; i < artist.length; i++) {
@@ -55,9 +51,6 @@ function newRecording() {
   }
   for (i = 0; i < label.length; i++) {
       form.append('recordLabelIds', label[i].value)
-  }
-  for (i = 0; i < right.length; i++) {
-    form.append('rightIds', right[i].value)
   }
   if (signature.length > 1) {
     for (i = 0; i < signature.length; i++) {

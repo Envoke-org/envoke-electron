@@ -4,13 +4,23 @@ const FormData = require('form-data')
 
 const common = require('./common.js')
 
+let widths = { 'default': { 'split': '50%', 'subject': '50%'}}
+
+common.addSubjectListener(['split'], 'recipient', widths)
+common.removeSubjectListener(1, ['split'], 'recipient', widths)
+
 document.getElementById('right-form').addEventListener('submit', (event) => {
   event.preventDefault()
-  let form = new FormData()
-  form.append('percentShares', document.getElementById('percent-shares').value)
-  form.append('previousRightId', document.getElementById('previous-right').value)
-  form.append('recipientId', document.getElementById('recipient').value)
-  form.append('rightToId', document.getElementById('right-to').value)
+  let form = new FormData(),
+      recipient = document.getElementsByName('recipient'),
+      split = document.getElementsByName('split')
+  form.append('assetId', document.getElementById('asset').value)
+  for (i = 0; i < recipient.length; i++) {
+    form.append('recipientIds', recipient[i].value)
+  }
+  for (i = 0; i < split.length; i++) {
+    form.append('splits', split[i].value)
+  }
   let req = main.httpRequest(
     (res) => {
       if (res.statusCode === 200) {

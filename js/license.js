@@ -4,23 +4,22 @@ const FormData = require('form-data')
 
 const common = require('./common.js')
 
-common.addSubjectListener(null, 'license-for')
+common.addSubjectListener(null, 'asset')
 common.addSubjectListener(null, 'license-holder')
-common.removeSubjectListener(1, null, 'license-for')
+common.removeSubjectListener(1, null, 'asset')
 common.removeSubjectListener(1, null, 'license-holder')
 
 document.getElementById('license').addEventListener('submit', (event) => {
   event.preventDefault()
   let form = new FormData(),
-      licenseFor = document.getElementsByName('license-for'),
+      asset = document.getElementsByName('asset'),
       licenseHolder = document.getElementsByName('license-holder')
-  for (i = 0; i < licenseFor.length; i++) {
-    form.append('licenseForIds', licenseFor[i].value)
+  for (i = 0; i < asset.length; i++) {
+    form.append('assetIds', asset[i].value)
   }
   for (i = 0; i < licenseHolder.length; i++) {
     form.append('licenseHolderIds', licenseHolder[i].value)
   }
-  form.append('validFrom', document.getElementById('valid-from').value)
   form.append('validThrough', document.getElementById('valid-through').value)
   let req = main.httpRequest(
     (res) => {
