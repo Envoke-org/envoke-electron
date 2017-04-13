@@ -35,6 +35,9 @@ document.getElementById('right-form').addEventListener('submit', (event) => {
     },
     form.getHeaders(), 'POST', '/right'
   )
+  req.on('error', (err) => {
+    alert(err)
+  })
   form.pipe(req)
   req.end()
 }, false)

@@ -4,7 +4,9 @@
   "description": "electron application that communicates with the envoke api",
   "version": "0.0.0",
   "scripts": {
-    "start": "electron main.js"
+    "start": "electron .",
+    "build": "electron-packager . envoke-electron --platform=darwin --icon='static/images/app-icon.icns' --asar --overwrite",
+    "dmg": "electron-installer-dmg envoke-electron-darwin-x64/envoke-electron.app envoke-electron --icon='static/images/app-icon.icns' --overwrite"
   },
   "author": "zachary balder",
   "license": "MIT",
@@ -12,7 +14,8 @@
     "form-data": "^2.1.2"
   },
   "devDependencies": {
-    "electron": "~1.6.2",
+    "electron": "^1.6.2",
+    "electron-installer-dmg": "^0.2.1",
     "electron-packager": "^8.6.0"
   }
 }

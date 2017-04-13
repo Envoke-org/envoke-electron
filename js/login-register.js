@@ -1,11 +1,10 @@
 const {remote} = require('electron')
 const main = remote.require('./main.js')
 const FormData = require('form-data')
-const fs = require('fs')
 
 const common = require('./common.js')
 
-document.getElementById('login').addEventListener('submit', (event) => {
+document.getElementById('login-form').addEventListener('submit', (event) => {
   event.preventDefault()
   let form = new FormData()
   form.append('privateKey', document.getElementById('privateKey').value)
@@ -23,11 +22,14 @@ document.getElementById('login').addEventListener('submit', (event) => {
     },
     form.getHeaders(),'POST', '/login'
   )
+  req.on('error', (err) => {
+    alert(err)
+  })
   form.pipe(req)
   req.end()
 }, false)
 
-document.getElementById('register').addEventListener('submit', (event) => {
+document.getElementById('register-form').addEventListener('submit', (event) => {
   event.preventDefault()
   let form = new FormData()
   form.append('email', document.getElementById('email').value)
@@ -35,27 +37,23 @@ document.getElementById('register').addEventListener('submit', (event) => {
   form.append('password', document.getElementById('password').value)
   form.append('sameAs', document.getElementById('sameAs').value)
   form.append('type', document.getElementById('type').value)
-  let file = fs.createWriteStream('../credentials/credentials.json')
-  file.on('open', (fd) => {
-    let req = main.httpRequest(
-      (res) => {
-        if (res.statusCode === 200) {
-          res.on('data', (data) => {
-            file.write(data)
-          }).on('end', () => {
-            file.end()
-          })
-        } else {
-          res.on('data', (data) => {
-            alert(data)
-          }).on('end', () => {
-            file.end()
-          })
-        }
-      },
-      form.getHeaders(), 'POST', '/register'
-    )
-    form.pipe(req)
-    req.end()
+  let req = main.httpRequest(
+    (res) => {
+      if (res.statusCode === 200) {
+        res.on('data', (data) => {
+          document.getElementById('response-text').innerHTML = main.formatJSON(data)
+        })
+      } else {
+        res.on('data', (data) => {
+          alert(data)
+        })
+      }
+    },
+    form.getHeaders(), 'POST', '/register'
+  )
+  req.on('error', (err) => {
+    alert(err)
   })
+  form.pipe(req)
+  req.end()
 }, false)

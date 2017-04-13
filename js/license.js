@@ -35,6 +35,9 @@ document.getElementById('license').addEventListener('submit', (event) => {
     },
     form.getHeaders(), 'POST', '/license'
   )
+  req.on('error', (err) => {
+    alert(err)
+  })
   form.pipe(req)
   req.end()
 }, false)

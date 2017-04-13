@@ -5,16 +5,16 @@
     <title>login-register</title>
 	</head>
   <body>
-    <form id='login'>
+    <form id='login-form'>
       <header>LOGIN</header>
       <input type='text' id='privateKey' placeholder='PRIVATE KEY' required />
       <input type='text' id='userId' placeholder='USER ID' required />
       <input type='submit' value='LOGIN' />
     </form><br><br>
-    <form id='register'>
+    <form id='register-form'>
       <header>REGISTER</header>
-      <select form='register-form' id='type' required>
-          <option value='' disabled selected>--USER TYPE--</option>
+      <select id='type' required>
+          <option disabled selected>--USER TYPE--</option>
           <option value='Person'>INDIVIDUAL</option>
           <option value='MusicGroup'>MUSIC GROUP</option>
           <option value='Organization'>ORGANIZATION</option>

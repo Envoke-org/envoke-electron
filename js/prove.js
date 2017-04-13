@@ -49,5 +49,8 @@ document.getElementById('prove-form').addEventListener('submit', (event) => {
     },
     null, 'GET', urlpath
   )
+  req.on('error', (err) => {
+    alert(err)
+  })
   req.end()
 }, false)

@@ -74,6 +74,9 @@ document.getElementById('compose-form').addEventListener('submit', (event) => {
     },
     form.getHeaders(),'POST', action.value
   )
+  req.on('error', (err) => {
+    alert(err)
+  })
   form.pipe(req)
   req.end()
 }, false)
