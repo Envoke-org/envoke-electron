@@ -10,23 +10,20 @@ let challenge = document.getElementById('challenge'),
     type = document.getElementById('type'),
     user = document.getElementById('user')
 
-type.addEventListener('change', (event) => {
-  switch (event.target.value) {
-      case 'composition':
+type.addEventListener('change', () => {
+  user.placeholder = type.value.toUpperCase()
+  switch (type.value) {
+      case 'composer' || 'publisher':
           tx.placeholder = 'COMPOSITION'
-          user.placeholder = 'COMPOSER'
           break
-      case 'license':
+      case 'license-holder':
           tx.placeholder = 'LICENSE'
-          user.placeholder = 'LICENSE-HOLDER'
           break
-      case 'recording':
+      case 'artist' || 'record-label':
           tx.placeholder = 'RECORDING'
-          user.placeholder = 'ARTIST'
           break
-      case 'right':
+      case 'right-holder':
           tx.placeholder = 'RIGHT'
-          user.placeholder = 'RIGHT-HOLDER'
           break
       default:
           alert('Invalid type: ' + type.value)

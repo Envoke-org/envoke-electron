@@ -8,16 +8,17 @@
     <button id='home'>HOME</button>
 		<form id='prove-form'>
     	<header>PROVE</header>
-        <select id='type' required>
-            <option selected disabled>--PROVE TYPE--</option>
-            <option value='composition'>COMPOSITION</option>
-            <option value='license'>LICENSE</option>
-            <option value='recording'>RECORDING</option>
-            <option value='right'>RIGHT</option>
-        </select><br><br>
+					<select id='type' required>
+							<option selected disabled>--PROVE TYPE--</option>
+								<option value='artist'>ARTIST</option>
+								<option value='composer'>COMPOSER</option>
+								<option value='license-holder'>LICENSE-HOLDER</option>
+								<option value='publisher'>PUBLISHER</option>
+								<option value='record-label'>RECORD-LABEL</option>
+								<option value='right-holder'>RIGHT-HOLDER</option>
+					</select><br><br>
         <input type='text' id='challenge' placeholder='CHALLENGE' required />
         <input type='text' id='tx' required />
-        <input type='text' id='user' required />
         <input type='submit' value='PROVE' />
     </form>
     <pre id='response-text'></pre>
