@@ -4,8 +4,6 @@ const FormData = require('form-data')
 
 const common = require('./common.js')
 
-main.addNavigation() // for now..
-
 document.getElementById('login-form').addEventListener('submit', (event) => {
   event.preventDefault()
   let form = new FormData()
@@ -14,7 +12,7 @@ document.getElementById('login-form').addEventListener('submit', (event) => {
   let req = main.httpRequest(
     (res) => {
       if (res.statusCode === 200) {
-        // main.addNavigation()
+        main.addNavigation()
         main.navigate('home')
       } else {
         res.on('data', (data) => {

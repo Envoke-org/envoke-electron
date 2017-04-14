@@ -19,10 +19,11 @@
 					<button id='remove-license-holder'>REMOVE LICENSE-HOLDER</button>
 				</div><br>
         <div id='license-holder'>
-          <input type='text' class='subject' name='license-holder' placeholder='LICENSE-HOLDER' required />
+					<div>
+          	<input type='text' class='subject' name='license-holder' placeholder='LICENSE-HOLDER' style='float:left;width:50%;' required />
+						<input type='text' name='valid-through' placeholder='VALID-THROUGH'  onfocus="(this.type='date')" onblur="(this.type='text')" style='float:left;width:50%;' />
+					</div>
         </div>
-        <label for='valid-through'>VALID THROUGH</label>
-        <input type='date' id='valid-through' required />
         <input type='submit' value='LICENSE' />
     </form>
     <pre id='response-text'></pre>

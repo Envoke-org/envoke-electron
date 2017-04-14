@@ -10,13 +10,15 @@ let challenge = document.getElementById('challenge'),
 
 type.addEventListener('change', () => {
   switch (type.value) {
-      case 'composer' || 'publisher':
+      case 'composer':
+      case 'publisher':
           tx.placeholder = 'COMPOSITION'
           break
       case 'license-holder':
           tx.placeholder = 'LICENSE'
           break
-      case 'artist' || 'record-label':
+      case 'artist':
+      case 'record-label':
           tx.placeholder = 'RECORDING'
           break
       case 'right-holder':

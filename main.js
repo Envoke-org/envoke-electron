@@ -162,7 +162,7 @@ app.on('ready', () => {
   menu = Menu.buildFromTemplate(template)
   Menu.setApplicationMenu(menu)
   win = new BrowserWindow({'height': 1000, 'width': 1000})
-  win.loadURL(`file://${__dirname}/templates/login-register.html`)
+  win.loadURL(`file://${__dirname}/templates/home.html`) //login-register
   win.on('closed', () => {
     win = null
   })
